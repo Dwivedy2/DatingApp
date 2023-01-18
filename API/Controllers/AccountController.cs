@@ -49,14 +49,14 @@ namespace API.Controllers
         {
             var user = _context.Users.FirstOrDefault(x => x.UserName.ToLower() == loginDto.Username.ToLower());
 
-            if (user == null) return BadRequest("invalid username !");
+            if (user == null) return BadRequest("Invalid Username !");
 
             using var hmac = new HMACSHA512(user.PasswordSalt);
             var passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
 
             for (int i = 0; i < passwordHash.Length; i++)
             {
-                if (passwordHash[i] != user.PasswordHash[i]) return Unauthorized("invalid password !");
+                if (passwordHash[i] != user.PasswordHash[i]) return Unauthorized("Invalid Password !");
             }
 
             return new UserDto
