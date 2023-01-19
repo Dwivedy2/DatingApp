@@ -24,22 +24,13 @@ export class NavComponent implements OnInit {
     });
   }
 
-  showError(error: any) {
-    this.toastr.error('Try again later', error, {
-      timeOut: 3000,
-    });
-  }
-
   login () {
     this.accountService.login(this.model).subscribe({
       next: _ => {
         this.router.navigateByUrl('/members'),
         this.showSuccess()
       },
-      error: error => {
-        console.log(error),
-        this.showError(error.error)
-      },
+      error: error => console.log(error)
     });
   }
 
