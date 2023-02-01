@@ -22,7 +22,7 @@ namespace API.Data
             return await _context.Users
                 .Where(u => u.UserName == username)
                 .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
-                .SingleOrDefaultAsync();
+                .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<MemberDto>> GetMembersAsync()
