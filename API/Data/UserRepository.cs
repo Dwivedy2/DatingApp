@@ -39,14 +39,14 @@ namespace API.Data
 
         public async Task<AppUser> GetUserByUsernameAsync(string username)
         {
-            return _context.Users
+            return await _context.Users
                 .Include(u => u.Photos)
-                .FirstOrDefault(u => u.UserName == username);
+                .FirstOrDefaultAsync(u => u.UserName == username);
         }
 
         public async Task<IEnumerable<AppUser>> GetUsersAsync()
         {
-            return await _context.Users
+            return await _context.Users!
                 .Include(u => u.Photos)
                 .ToListAsync();
         }
